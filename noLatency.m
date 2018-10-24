@@ -1,6 +1,7 @@
+
 hold on;
 close all;
-%opengl software
+opengl software
 
 count1 = 1;
 count2 = 1;
@@ -8,6 +9,8 @@ count3 = 1;
 count4 = 1;
 
 xPacketTime = 0;
+
+globalCount = 1;
 
 
 inputData = zeros(15,1);
@@ -46,6 +49,7 @@ fopen(u);
 
 figure(1);
 while 1
+globalCount = globalCount +1;
 
 data = fscanf(u,'%s');
 
@@ -65,72 +69,72 @@ switch truckId
 
         if(count1<10)
            % set(0, 'CurrentFigure', f1)
-            subplot(5,2,1);
+            subplot(2,2,1);
             plot(time1(1:count1),yAxisRSSI1(1:count1),'r');
             title('RSSI Truck #1')
             xlabel('Time')
             ylabel('RSSI (dBm)')
             ylim([-100 0])
           %  set(0, 'CurrentFigure', f2)
-            subplot(5,2,2);
-            plot(time1(1:count1),latency1(1:count1),'r');
-            title('Latency')
-            xlabel('Time')
-            ylabel('Time (ms)')
-            ylim([1 10]) 
+         %   subplot(5,2,2);
+         %   plot(time1(1:count1),latency1(1:count1),'r');
+         %   title('Latency')
+         %   xlabel('Time')
+         %   ylabel('Time (ms)')
+         %   ylim([1 10]) 
         else
             %set(0, 'CurrentFigure', f1)
-            subplot(5,2,1);
+            subplot(2,2,1);
             plot(time1(count1-9:count1),yAxisRSSI1(count1-9:count1),'r');
             title('RSSI Truck #1')
             xlabel('Time')
             ylabel('RSSI (dBm)')
             ylim([-100 0])
          %   set(0, 'CurrentFigure', f2)
-            subplot(5,2,2);
-            plot(time1(count1-9:count1),latency1(count1-9:count1),'r'); 
-            title('Latency')
-            xlabel('Time')
-            ylabel('Time (ms)')
-            ylim([1 10]) 
+         %   subplot(5,2,2);
+         %   plot(time1(count1-9:count1),latency1(count1-9:count1),'r'); 
+         %   title('Latency')
+         %   xlabel('Time')
+         %   ylabel('Time (ms)')
+         %   ylim([1 10]) 
         end
 
     case 2
         count2 = count2+1;
         yAxisRSSI2(count2) = str2double(inputData{1,11});
-        latency2(count2) = str2double(inputData{1,14});
+        latency2(count2) =  str2double(inputData{1,14});
         time2(count2) = str2double(inputData{1,15});
         xCounter2(count2) = count2;
         if(count2<10)
        % set(0, 'CurrentFigure', f1)
-        subplot(5,2,3);
+        subplot(2,2,2);
         plot(time2(1:count2),yAxisRSSI2(1:count2),'g');
         title('RSSI Truck #2')
         xlabel('Time')
         ylabel('RSSI (dBm)')
         ylim([-100 0])
        % set(0, 'CurrentFigure', f2)
-        subplot(5,2,4);
-        plot(time2(1:count2),latency2(1:count2),'g');
-        title('Latency')
-        xlabel('Time')
-        ylabel('Time (ms)')
-        ylim([1 10])
+      %  subplot(5,2,4);
+      %  plot(time2(1:count2),latency2(1:count2),'g');
+      %  title('Latency')
+      %  xlabel('Time')
+      %  ylabel('Time (ms)')
+     %   ylim([1 10])
         else
            % set(0, 'CurrentFigure', f1)
-            subplot(5,2,3);
+            subplot(2,2,2);
             plot(time2(count2-9:count2),yAxisRSSI2(count2-9:count2),'g'); 
             title('RSSI Truck #2')
             xlabel('Time')
             ylabel('RSSI (dBm)')
             ylim([-100 0])
       %              set(0, 'CurrentFigure', f2)
-        subplot(5,2,4);
-         plot(time2(count2-9:count2),latency2(count2-9:count2),'g'); 
-        title('Latency')
-        xlabel('Time')
-        ylabel('Time (ms)')
-        ylim([1 10])
+     %   subplot(5,2,4);
+      %   plot(time2(count2-9:count2),latency2(count2-9:count2),'g'); 
+      %  title('Latency')
+      %  xlabel('Time')
+      %  ylabel('Time (ms)')
+      %  ylim([1 10])
         
         end
 
@@ -141,19 +145,35 @@ switch truckId
         latency3(count3) = str2double(inputData{1,14});
         time3(count3) = str2double(inputData{1,15});
         xCounter3(count3) = count3;
-        %set(0, 'CurrentFigure', f1)
-        subplot(2,2,3);
+
         if(count3<10)
+            %set(0, 'CurrentFigure', f1)
+            subplot(2,2,3);
             plot(time3(1:count3),yAxisRSSI3(1:count3),'b');
-        else
-            plot(time3(count3-9:count3),yAxisRSSI3(count3-9:count3),'b'); 
-        end
             title('RSSI Truck #3')
             xlabel('Time')
             ylabel('RSSI (dBm)')
             ylim([-100 0])
-            
-            %   set(0, 'CurrentFigure', f2)
+          %  subplot(5,2,6);
+          %  plot(time3(1:count3),latency3(1:count3),'b');
+          %  title('Latency')
+          %  xlabel('Time')
+          %  ylabel('Time (ms)')
+          %  ylim([1 10])
+        else
+            subplot(2,2,3);
+            plot(time3(count3-9:count3),yAxisRSSI3(count3-9:count3),'b'); 
+            title('RSSI Truck #3')
+            xlabel('Time')
+            ylabel('RSSI (dBm)')
+            ylim([-100 0])
+           % subplot(5,2,6);
+           % plot(time3(count3-9:count3),latency3(count3-9:count3),'b'); 
+           % title('Latency')
+           % xlabel('Time')
+           % ylabel('Time (ms)')
+           % ylim([1 10])
+        end
 
     case 4
         count4 = count4+1;
@@ -162,19 +182,34 @@ switch truckId
         time4(count4) = str2double(inputData{1,15});
         xCounter4(count4) = count4;
         
-        set(0, 'CurrentFigure', f1)
-        subplot(2,2,4);
         if(count4<10)
-            plot(time4(1:count4),yAxisRSSI4(1:count4),'y');
+            subplot(2,2,4);
+            plot(time4(1:count4),yAxisRSSI4(1:count4),'p');
+            title('RSSI Truck #4')
+            xlabel('Time')
+            ylabel('RSSI (dBm)')
+            ylim([-100 0])
+          %  subplot(5,2,6);
+          %  plot(time4(1:count4),latency4(1:count4),'p');
+          %  title('Latency')
+          %  xlabel('Time')
+          %  ylabel('Time (ms)')
+          %  ylim([1 10])
         else
-           plot(time4(count4-9:count4),yAxisRSSI4(count4-9:count4),'y'); 
+           subplot(2,2,4);
+           plot(time4(count4-9:count4),yAxisRSSI4(count4-9:count4),'p'); 
+           title('RSSI Truck #4')
+           xlabel('Time')
+           ylabel('RSSI (dBm)')
+           ylim([-100 0])
+           % subplot(5,2,6);
+           % plot(time4(count4-9:count4),latency4(count4-9:count4),'p'); 
+           % title('Latency')
+           % xlabel('Time')
+           % ylabel('Time (ms)')
+           % ylim([1 10])
         end
-        title('RSSI Truck #4')
-        xlabel('Time')
-        ylabel('RSSI (dBm)')
-        ylim([-100 0])
-        
-       %     set(0, 'CurrentFigure', f2)
+
 
 end
 
@@ -182,9 +217,10 @@ drawnow limitrate
 flushinput(u);
 
 
-
-fprintf("\n RSSI 1:%d  RSSI 2:%d  RSSI 3:%d  RSSI 4:%d",yAxisRSSI1(count1),yAxisRSSI2(count2),yAxisRSSI3(count3),yAxisRSSI4(count4));
-
+if(globalCount == 11)
+fprintf("\n RSSI 1:%d  Latency 1:%.2f  RSSI 2:%d  Latency 2:%.2f  RSSI 3:%d  Latency 3:%.2f  RSSI 4:%d Latency 4:%.2f",yAxisRSSI1(count1),latency1(count1),yAxisRSSI2(count2),latency2(count2),yAxisRSSI3(count3),latency3(count3),yAxisRSSI4(count4),latency4(count4));
+globalCount = 1;
+end
 
 end
 %%
